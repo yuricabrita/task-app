@@ -42,16 +42,31 @@ p{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
+
     margin-top: 0;
     padding: 0;
+    padding-left: 10px;
     a {
-
-        text-align: center;
+        padding-left: 10px;
     }
 }
 
 .tasks {
-    display: flex;
-    justify-content: center;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    p {
+        margin:0;
+    }
+    li {
+        overflow: auto;
+        padding: 10px 0;
+        border-bottom: 1px solid $gray-lighter;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
 }
