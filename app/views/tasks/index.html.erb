@@ -1,11 +1,9 @@
-<div class="column">
+<div class="container">
   <section class="title-add">
     <h1>Tasks</h1>
     <%= link_to "Add task...", new_task_path %>
   </section>
-  <section class="tasks">
-    <ul>
-      <%= render @tasks %>
-    </ul>
-  </section>
+  <ul  class="tasks">
+    <%= render @tasks %>
+  </ul>
 </div>
