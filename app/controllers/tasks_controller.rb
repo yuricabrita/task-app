@@ -1,50 +1,51 @@
 class TasksController < ApplicationController
 
-    def index
-        @tasks = Task.paginate(page: params[:page], per_page: 5)
-    end
+  def index
+    @tasks = Task.paginate(page: params[:page], per_page: 5)
+  end
 
-    def new
-        @task = Task.new
-    end
+  def new
+    @task = Task.new
+  end
 
-    def create
-        @task = Task.new(task_params)
-        if @task.save
-            flash[:success] = "Task successfully added!"
-            redirect_to root_url
-        else
-            render 'new'
-        end
+  def create
+    @task = Task.new(task_params)
+    if @task.save
+      flash[:success] = "Task successfully added!"
+      redirect_to root_url
+    else
+      render 'new'
     end
+  end
 
-    def edit
-        @task = Task.find(params[:id])
-    end
+  def edit
+    @task = Task.find(params[:id])
+  end
 
-    def update
-        @task = Task.find(params[:id])
-    
-        if @task.update(task_params)
-          flash[:success] = "Task updated"
-          redirect_to root_url
-        else
-          render "edit"
-        end
-    end
+  def update
+    @task = Task.find(params[:id])
 
-    def task_complete
-        @task = Task.find(params[:task_id])
-        if @task.update(complete: true)
-            flash[:success] = "Task completed"
-            redirect_back(fallback_location: root_path)
-        else
-            redirect_to root_url
-          end
+    if @task.update(task_params)
+      flash[:success] = "Task updated"
+      redirect_to root_url
+    else
+      render "edit"
     end
-    private
+  end
 
-    def task_params
-      params.require(:task).permit(:title, :description, :date_and_time, :complete)
+  def complete
+    @task = Task.find(params[:id])
+    if @task.update(complete: true)
+      flash[:success] = "Task completed"
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to root_url
     end
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:title, :description, :date_and_time, :complete)
+  end
 end
