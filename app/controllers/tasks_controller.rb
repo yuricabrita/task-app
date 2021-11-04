@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
     def index
-        @tasks = Task.all
+        @tasks = Task.paginate(page: params[:page], per_page: 5)
     end
 
     def new
@@ -18,9 +18,33 @@ class TasksController < ApplicationController
         end
     end
 
+    def edit
+        @task = Task.find(params[:id])
+    end
+
+    def update
+        @task = Task.find(params[:id])
+    
+        if @task.update(task_params)
+          flash[:success] = "Task updated"
+          redirect_to root_url
+        else
+          render "edit"
+        end
+    end
+
+    def task_complete
+        @task = Task.find(params[:task_id])
+        if @task.update(complete: true)
+            flash[:success] = "Task completed"
+            redirect_back(fallback_location: root_path)
+        else
+            redirect_to root_url
+          end
+    end
     private
 
     def task_params
-      params.require(:task).permit(:title, :description, :date_and_time)
+      params.require(:task).permit(:title, :description, :date_and_time, :complete)
     end
 end

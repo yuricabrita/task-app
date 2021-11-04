@@ -2,4 +2,14 @@
   <h2><%= task.title %></h1>
   <p><%= task.description %></p>
   <p><%= task.date_and_time %></p>
+  <% if task.complete? %>
+    <p class="completed-task"><strong>Completed</strong></p>
+  <% else %>
+    <p class="uncompleted-task"><strong>Not completed</strong></p>
+    <%= form_with(url: tasks_task_complete_url, html: {method: :post}, local: true) do |f|%>
+      <div><%= hidden_field_tag :task_id, task.id %></div>
+      <%= f.submit "Complete", class: "btn btn-secondary" %>
+    <% end %>
+  <%end %>
+  <%= link_to "Edit task...", edit_task_path(task) %>
 </li>
