@@ -9,5 +9,5 @@
     <%= f.label :complete %>
     <%= f.check_box :complete, class: 'form-control' %>
   <% end %>
-  <%= f.submit "Add task", class: "btn btn-primary" %>
+  <%= f.submit yield(:button_title), class: "btn btn-primary" %>
 <% end %>
