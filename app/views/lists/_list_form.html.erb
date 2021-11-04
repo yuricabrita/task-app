@@ -1,0 +1,5 @@
+<%= form_with(model: list, local: true) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+  <%= f.submit "Add list", class: "btn btn-primary" %>
+<% end %>

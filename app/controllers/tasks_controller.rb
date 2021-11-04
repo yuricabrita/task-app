@@ -5,14 +5,17 @@ class TasksController < ApplicationController
   end
 
   def new
+    @list_id = params[:list_id]
     @task = Task.new
+    
   end
 
   def create
     @task = Task.new(task_params)
+    @task.list_id = params[:list_id]
     if @task.save
       flash[:success] = "Task successfully added!"
-      redirect_to root_url
+      redirect_to list_url(params[:list_id])
     else
       render 'new'
     end
@@ -27,16 +30,18 @@ class TasksController < ApplicationController
 
     if @task.update(task_params)
       flash[:success] = "Task updated"
-      redirect_to root_url
+      redirect_to list_url(@task.list_id)
     else
       render "edit"
     end
   end
 
   def destroy
-    Task.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to tasks_url
+    @task = Task.find(params[:id])
+    @assoc_list = @task.list_id
+    @task.destroy
+    flash[:success] = "Task deleted"
+    redirect_to list_url(@assoc_list)
   end
 
   def complete
@@ -49,9 +54,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def incompleted
+    #@incomplete_tasks = Task.where('complete = false AND list_id = ?', params[:list_id])
+    @incomplete_tasks = Task.where('complete = false AND list_id = 2')
+    debugger
+    redirect_to list_url(params[:list_id], incomplete_tasks: @incomplete_tasks)
+  end
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :date_and_time, :complete)
+    params.require(:task).permit(:title, :description, :date_and_time, :complete, :list_id)
   end
 end
