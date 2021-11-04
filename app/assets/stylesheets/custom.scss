@@ -70,3 +70,11 @@ p{
     display: flex;
     flex-direction: column;
 }
+
+.uncompleted-task {
+    color: red;
+}
+
+.completed-task {
+    color: green;
+}

@@ -2,8 +2,10 @@
   <section class="title-add">
     <h1>Tasks</h1>
     <%= link_to "Add task...", new_task_path %>
+    <%= will_paginate %>
+    <ul  class="tasks">
+      <%= render @tasks %>
+    </ul>
+    <%= will_paginate %>
   </section>
-  <ul  class="tasks">
-    <%= render @tasks %>
-  </ul>
 </div>
