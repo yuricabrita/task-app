@@ -10,5 +10,6 @@
       <%= f.submit "Complete", class: "btn btn-secondary" %>
     <% end %>
   <%end %>
-  <%= link_to "Edit task...", edit_task_path(task) %>
+  <%= link_to "Edit", edit_task_path(task) %>
+  <%= link_to "Delete", task, method: :delete, data: { confirm: "Are you sure?" } %>
 </li>

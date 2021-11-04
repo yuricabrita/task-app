@@ -33,6 +33,12 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    Task.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to tasks_url
+  end
+
   def complete
     @task = Task.find(params[:id])
     if @task.update(complete: true)
