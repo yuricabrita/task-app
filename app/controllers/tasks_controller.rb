@@ -55,11 +55,16 @@ class TasksController < ApplicationController
   end
 
   def incompleted
-    #@incomplete_tasks = Task.where('complete = false AND list_id = ?', params[:list_id])
-    @incomplete_tasks = Task.where('complete = false AND list_id = 2')
-    debugger
+    @incomplete_tasks = true
     redirect_to list_url(params[:list_id], incomplete_tasks: @incomplete_tasks)
   end
+
+  def completed
+    @completed_tasks = false
+    redirect_to list_url(params[:list_id], completed_tasks: @completed_tasks)
+  end
+
+
   private
 
   def task_params

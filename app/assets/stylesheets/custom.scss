@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 body {
-    padding-top: 90px;
+    padding-top: 60px;
     }
 
 
@@ -82,9 +82,9 @@ p{
 
 #logo {
   float: left;
-  margin-right: 10px;
+  margin-right: 50px;
   font-size: 1.7em;
-  color: white;
+  color: gray;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
@@ -93,4 +93,10 @@ p{
       color: white;
       text-decoration: none;
   }
+  position: absolute;
+  left: 10%;
+  display: block;
+}
+
+.navbar {
 }
