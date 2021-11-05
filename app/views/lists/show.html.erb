@@ -1,0 +1,22 @@
+<div class="container">
+  <section class="title-add">
+    <h1><%= @list.title %></h1>
+    <%= link_to "Add task...", new_task_path(list_id: @list.id)%>
+    <% if @tasks.size > 0 %>
+      <% if !@incomplete_tasks %>
+        <%= link_to "Not completed tasks", incompleted_tasks_path(list_id: @list.id)%>
+      <% end %>
+      <% if !@completed_tasks %>
+        <%= link_to "Completed tasks", completed_tasks_path(list_id: @list.id)%>
+      <% end %>
+      <% if @incomplete_tasks || @completed_tasks %>
+        <%= link_to "All tasks", list_path(@list.id)%>
+      <% end %>
+    <% end %>
+    <%= will_paginate @tasks%>
+    <ul class="tasks">
+      <%= render @tasks %>
+    </ul>
+    <%= will_paginate @tasks%>
+  </section>
+</div>

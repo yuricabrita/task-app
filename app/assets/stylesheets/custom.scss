@@ -70,3 +70,33 @@ p{
     display: flex;
     flex-direction: column;
 }
+
+.uncompleted-task {
+    color: red;
+}
+
+.completed-task {
+    color: green;
+}
+
+
+#logo {
+  float: left;
+  margin-right: 50px;
+  font-size: 1.7em;
+  color: gray;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+      color: white;
+      text-decoration: none;
+  }
+  position: absolute;
+  left: 10%;
+  display: block;
+}
+
+.navbar {
+}

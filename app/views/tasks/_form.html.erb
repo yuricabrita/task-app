@@ -1,0 +1,14 @@
+<%= form_with(model: task, local: true) do |f|%>
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+  <%= f.label :description %>
+  <%= f.text_field :description, class: 'form-control' %>
+  <%= f.label :date_and_time %>
+  <%= f.datetime_local_field :date_and_time, class: 'form-control' %>
+  <% if !task.id.nil? %>
+    <%= f.label :complete %>
+    <%= f.check_box :complete, class: 'form-control' %>
+  <% end %>
+  <div><%= hidden_field_tag :list_id, @list_id %></div>
+  <%= f.submit yield(:button_title), class: "btn btn-primary" %>
+<% end %>
