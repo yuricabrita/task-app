@@ -6,14 +6,11 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @tasks = @list.tasks.paginate(page: params[:page], per_page: 5)
-    if(params[:incomplete_tasks])
-      @tasks = Task.where('complete = false AND list_id = ?', @list.id).paginate(page: params[:page], per_page: 5)
-      @incomplete_tasks = params[:incomplete_tasks]
-    end
-    if(params[:completed_tasks])
-      @tasks = Task.where('complete = true AND list_id = ?', @list.id).paginate(page: params[:page], per_page: 5)
-      @completed_tasks = params[:completed_tasks]
+    @task_status = params[:task_status]
+    if(@task_status)
+      @tasks = @list.tasks.send(@task_status).paginate(page: params[:page], per_page: 5)
+    else
+      @tasks = @list.tasks.incompleted.paginate(page: params[:page], per_page: 5)
     end
   end
 

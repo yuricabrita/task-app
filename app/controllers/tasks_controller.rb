@@ -55,15 +55,18 @@ class TasksController < ApplicationController
   end
 
   def incompleted
-    @incomplete_tasks = true
-    redirect_to list_url(params[:list_id], incomplete_tasks: @incomplete_tasks)
+    @tasks = List.find(params[:list_id]).tasks.incompleted
+    respond_to do |format|
+      format.js 
+    end
   end
 
   def completed
-    @completed_tasks = false
-    redirect_to list_url(params[:list_id], completed_tasks: @completed_tasks)
+    @tasks = List.find(params[:list_id]).tasks.completed
+    respond_to do |format|
+      format.js 
+    end
   end
-
 
   private
 

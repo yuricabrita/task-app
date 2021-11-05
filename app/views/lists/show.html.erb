@@ -2,19 +2,21 @@
   <section class="title-add">
     <h1><%= @list.title %></h1>
     <%= link_to "Add task...", new_task_path(list_id: @list.id)%>
-    <% if @tasks.size > 0 %>
+    <%= link_to("Completed tasks", list_path(@list, task_status: :completed)) if @task_status != "completed" %>
+    <%= link_to("Incompleted tasks", list_path(@list, task_status: :incompleted)) if(@task_status.present? && @task_status != "incompleted") %>
+    <!--<% if @tasks.size > 0 %>
       <% if !@incomplete_tasks %>
-        <%= link_to "Not completed tasks", incompleted_tasks_path(list_id: @list.id)%>
+        <%= link_to "Not completed tasks", incompleted_tasks_path(list_id: @list.id), remote: true %>
       <% end %>
       <% if !@completed_tasks %>
-        <%= link_to "Completed tasks", completed_tasks_path(list_id: @list.id)%>
+        <%= link_to "Completed tasks", completed_tasks_path(list_id: @list.id), remote: true %>
       <% end %>
       <% if @incomplete_tasks || @completed_tasks %>
         <%= link_to "All tasks", list_path(@list.id)%>
       <% end %>
-    <% end %>
+    <% end %> -->
     <%= will_paginate @tasks%>
-    <ul class="tasks">
+    <ul class="tasks" id="task-list">
       <%= render @tasks %>
     </ul>
     <%= will_paginate @tasks%>
